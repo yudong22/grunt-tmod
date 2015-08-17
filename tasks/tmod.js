@@ -10,7 +10,7 @@
 
 var path = require('path');
 var fs = require('fs');
-var TmodJS = require("tmodjs");
+var TmodJS = require("freemodjs");
 
 module.exports = function(grunt) {
 

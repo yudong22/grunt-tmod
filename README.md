@@ -1,6 +1,37 @@
-# grunt-tmod
+# grunt-freemod
+
+fork the grunt plugin grunt-tmodjs and support java freemark template
 
 前端模板预编译工具 [tmodjs](https://github.com/aui/tmodjs) 的grunt自动化插件。
+
+定义语法完全兼容`tmod`,区别仅在支持一些freemark的简易语法，如：
+
+```
+ 1.      <#if vm.errorCode?? && vm.errorCode != "" >
+                            ......
+                  <#else>
+                            ......
+                   </#if>
+ 
+ 2.               <#switch vm.errorCode>
+                   <#case 'HOTEL_LONGCUI_LOGIN'>
+                      ......
+                   <#break>
+                   <#case 'HOTEL_PARAMETER_INVALID'>
+                      ......
+                   <#break>
+                   <#default>
+                       ......
+           </#switch>
+ 
+3.   <#list vm.invoiceMailingAddress as addr>
+            ......
+        </#list>
+ 
+4. <#setting number_format="0.########">  (设置freemaker自身参数的)
+```
+
+
 
 ## Getting Started
 需要环境: Grunt `~0.4.1`
@@ -13,13 +44,13 @@
 安装插件:
 
 ```shell
-npm install grunt-tmod --save-dev
+npm install grunt-freemod --save-dev
 ```
 
 安装完插件后要在gruntfile里面加上这句代码,载入这个插件:
 
 ```js
-grunt.loadNpmTasks('grunt-tmod');
+grunt.loadNpmTasks('grunt-freemod');
 ```
 
 ### 设置
@@ -89,7 +120,7 @@ module.exports = function(grunt){
     });
 
 
-    grunt.loadNpmTasks('grunt-tmod');
+    grunt.loadNpmTasks('grunt-freemod');
 
     grunt.registerTask('default', ['tmod']);
 
@@ -132,7 +163,7 @@ module.exports = function(grunt){
     });
 
 
-    grunt.loadNpmTasks('grunt-tmod');
+    grunt.loadNpmTasks('grunt-freemod');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('default', ['tmod', 'watch']);

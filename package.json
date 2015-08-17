@@ -1,25 +1,20 @@
 {
-  "name": "grunt-tmod",
-  "description": "the grunt plugin for tmodjs",
-  "version": "0.2.10",
-  "homepage": "https://github.com/Jsonzhang/grunt-tmod",
-  "author": {
-    "name": "Json",
-    "email": "enjoy.doing.19@gmail.com"
-  },
+  "name": "grunt-freemod",
+  "description": "fork the grunt plugin grunt-tmodjs and support java freemark template",
+  "version": "0.1.0",
+  "homepage": "http://ued.corp.elong.com",
+  "keywords": [
+    "freemark",
+    "tmod",
+    "art-template",
+    "grunt-tmod",
+    "javascript"
+  ],
+  "author": "elong",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Jsonzhang/grunt-tmod.git"
+    "url": "git://github.com/yudong22/grunt-tmod.git"
   },
-  "bugs": {
-    "url": "https://github.com/Jsonzhang/grunt-tmod/issues"
-  },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/Jsonzhang/grunt-tmod/blob/master/LICENSE-MIT"
-    }
-  ],
   "main": "Gruntfile.js",
   "engines": {
     "node": ">= 0.8.0"
@@ -28,7 +23,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "tmodjs": "*"
+    "freemodjs": "*"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.6.0",
