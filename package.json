@@ -1,17 +1,18 @@
 {
   "name": "grunt-freemod",
   "description": "fork the grunt plugin grunt-tmodjs and support java freemark template",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "homepage": "http://ued.corp.elong.com",
   "keywords": [
     "gruntplugin",
     "tmodjs",
-    "seajs",
-    "requirejs"
+    "freemark",
+    "tmod",
+    "art-template",
+    "grunt-freemod",
+    "javascript"
   ],
-  "author": {
-    "name": "elong"
-  },
+  "author": "elong",
   "repository": {
     "type": "git",
     "url": "git://github.com/yudong22/grunt-tmod.git"
@@ -36,6 +37,7 @@
   "peerDependencies": {
     "grunt": "~0.4.1"
   },
+<<<<<<< HEAD
   "readme": "# grunt-freemod\n\nfork the grunt plugin grunt-tmodjs and support java freemark template\n\n前端模板预编译工具 [tmodjs](https://github.com/aui/tmodjs) 的grunt自动化插件。\n\n定义语法完全兼容`tmod`,区别仅在支持一些freemark的简易语法，如：\n\n```\n 1.      <#if vm.errorCode?? && vm.errorCode != \"\" >\n                            ......\n                  <#else>\n                            ......\n                   </#if>\n \n 2.               <#switch vm.errorCode>\n                   <#case 'HOTEL_LONGCUI_LOGIN'>\n                      ......\n                   <#break>\n                   <#case 'HOTEL_PARAMETER_INVALID'>\n                      ......\n                   <#break>\n                   <#default>\n                       ......\n           </#switch>\n \n3.   <#list vm.invoiceMailingAddress as addr>\n            ......\n        </#list>\n \n4. <#setting number_format=\"0.########\">  (设置freemaker自身参数的)\n```\n\n\n\n## Getting Started\n需要环境: Grunt `~0.4.1`\n\n如果你没有用过 [Grunt](http://gruntjs.com/) , 可以先看一下 [新手入门](http://gruntjs.com/getting-started) 指南, 里面有讲解怎么创建一个 [Gruntfile](http://gruntjs.com/sample-gruntfile) 和如何使用grunt插件. \n\n顺路推荐 : [中文版的grunt社区](http://www.gruntjs.org/article/home.html)\n\n\n安装插件:\n\n```shell\nnpm install grunt-freemod --save-dev\n```\n\n安装完插件后要在gruntfile里面加上这句代码,载入这个插件:\n\n```js\ngrunt.loadNpmTasks('grunt-freemod');\n```\n\n### 设置\n\n\n##\tsrc\n\n*\t类型：`String` | `Array`\n\n模版文件\n\n##\tdest\n\n*\t类型：`String`\n\n输出路径。\n\n##\toptions\n\n支持[tmodjs的配置](https://github.com/aui/tmodjs#配置)，还新增如下字段：\n\n####\toptions.base\n\n*\t类型：`String`\n\n指定模板的根目录，以便缩短编译后的模板id访问路径。\n\n示例：\n\n```\ntmod: {\n    template: {\n        src: './tpl/src/**/*.html',\n        dest: './dist/template.js',\n        options: {\n            base: './tpl/src'\n        } \n    }\n}\n```\n\n以某个模板为例，默认情况调用模板的路径将可能会很长：\n\n\ttemplate('./tpl/src/home/main', data)\n\t\n使用`base`后可以省略模板目录调用模板\n\n\ttemplate('home/main', data)\n\n##\t示例\n\n###\t基本\n\n```\nmodule.exports = function(grunt){\n\n    grunt.initConfig({\n        tmod: {\n            template: {\n                src: './tpl/**/*.html',\n                dest: './dist/template.js',\n                options: {\n                    combo: true\n                } \n            }\n        }\n    });\n\n\n    grunt.loadNpmTasks('grunt-freemod');\n\n    grunt.registerTask('default', ['tmod']);\n\n};\n\n```\n\n###\t监控模板修改即时编译\n\n> 原tmodjs有配备的watch功能,在grunt中统一使用[watch插件](https://github.com/gruntjs/grunt-contrib-watch)来实现,所以取消了grunt-tmodjs中的watch参数.具体设置方法可以参照下面带watch的配置示例,也可以参考[grunt-contrib-watch](https://github.com/gruntjs/grunt-contrib-watch)官网的说明.\n\n先安装watch插件\n\n```shell\nnpm install grunt-contrib-watch --save-dev\n```\n\n```\nmodule.exports = function(grunt){\n\n    grunt.initConfig({\n        tmod: {\n            template: {\n                src: './tpl/**/*.html',\n                dest: './dist/template.js',\n                options: {\n                    combo: true\n                } \n            }\n        },\n        watch: {\n            template: {\n                files: '<%=tmod.template.src%>',\n                tasks: ['tmod'],\n                options: {\n                    spawn: false\n                }\n            }\n        }\n    });\n\n\n    grunt.loadNpmTasks('grunt-freemod');\n    grunt.loadNpmTasks('grunt-contrib-watch');\n\n    grunt.registerTask('default', ['tmod', 'watch']);\n\n};\n\n```\n\n###\t使用调试模式编译\n\n运行grunt任务的时候加上`--debug`参数即可：\n\n\tgrunt --debug\n\n## Release History\n\nv 0.2.0 遵循标准的 grunt 路径配置规范，同时支持编译错误显示。注意：不兼容历史版本 14-04-30\n\nv 0.1.6 修复dest的路径问题 , 原本`dest`属性是放在files属性里 , 0.1.6版本后建议将 `dest` 属性放在 `option` 中, 如本篇 readMe 的代码所示. \n如果有多个模版文件目录需要配置,建议使用多个任务的方式来配置,不建议在`src`中放入路径数组.  13-12-08\n\nv 0.1.5 修复不支持多任务的bug 13-11-14\n\nv 0.1.4 去除掉打包的tmodjs改为依赖,将内置tmod依赖改为0.0.2版本 13-11-11\n\nv 0.1.3 第二个版本,配合npm修改版本号,加上参数识别功能  13-11-10\n\nv 0.0.1 第一个版本  13-10-23\n\n\n## License\n\nThe MIT license.\n",
   "readmeFilename": "README.md",
   "gitHead": "9351bb3fe1cf1b709eef32793010e644bab302a5",
@@ -45,4 +47,12 @@
   "_id": "grunt-freemod@1.0.0",
   "_shasum": "43b5b6cd0c32f1cbddc21ae1339c16d2aa6c6167",
   "_from": "grunt-freemod@>=1.0.0 <2.0.0"
+=======
+  "keywords": [
+    "gruntplugin",
+    "tmodjs",
+    "seajs",
+    "requirejs"
+  ]
+>>>>>>> 9351bb3fe1cf1b709eef32793010e644bab302a5
 }
